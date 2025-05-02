@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.bookify.app.controller.AdminController"
+      spacing="15" styleClass="admin-panel">
+    
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Admin Dashboard" styleClass="header-label"/>
+        <Pane HBox.hgrow="ALWAYS" />
+        <Button text="Logout" onAction="#logout" styleClass="action-button"/>
+    </HBox>
+    
+    <Separator />
+    
+    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <Tab text="User Management">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <TextField fx:id="userSearchField" promptText="Search users..." HBox.hgrow="ALWAYS"/>
+                    <Button text="Search" onAction="#searchUsers"/>
+                    <Button text="Add User" onAction="#showAddUserDialog"/>
+                </HBox>
+                
+                <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="userIdColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="usernameColumn" text="Username" prefWidth="150"/>
+                        <TableColumn fx:id="userRoleColumn" text="Role" prefWidth="100"/>
+                        <TableColumn fx:id="userStatusColumn" text="Status" prefWidth="100"/>
+                        <TableColumn fx:id="userActionsColumn" text="Actions" prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+        
+        <Tab text="System Settings">
+            <GridPane vgap="10" hgap="10">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                
+                <Label text="Company Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="companyNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                
+                <Label text="Email Template:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextArea fx:id="emailTemplateField" prefHeight="100" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                
+                <Label text="Backup Frequency:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="backupFrequencyCombo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                
+                <HBox alignment="CENTER_RIGHT" spacing="10" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                    <Button text="Save Settings" onAction="#saveSettings"/>
+                    <Button text="Reset" onAction="#resetSettings"/>
+                </HBox>
+            </GridPane>
+        </Tab>
+        
+        <Tab text="Database">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                
+                <HBox spacing="10">
+                    <Button text="Backup Database" onAction="#backupDatabase"/>
+                    <Button text="Restore Database" onAction="#restoreDatabase"/>
+                </HBox>
+                
+                <TitledPane text="Database Statistics" expanded="true">
+                    <GridPane vgap="5" hgap="10">
+                        <Label text="Total Customers:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalCustomersLabel" text="0" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Total Destinations:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalDestinationsLabel" text="0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Total Bookings:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalBookingsLabel" text="0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Last Backup:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <Label fx:id="lastBackupLabel" text="Never" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </TitledPane>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox> 

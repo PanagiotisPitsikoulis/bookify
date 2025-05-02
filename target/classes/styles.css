@@ -1,0 +1,400 @@
+/* Modern UI styles - inspired by shadcn */
+.root {
+    -fx-font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    -fx-background-color: #fafafa;
+    -fx-text-fill: #171717;
+}
+
+/* Color variables */
+* {
+    -primary: #0070F3;
+    -primary-hover: #0058CC;
+    -foreground: #171717;
+    -muted: #737373;
+    -muted-foreground: #525252;
+    -border: #e5e5e5;
+    -background: #ffffff;
+    -background-muted: #f4f4f5;
+    -error: #ef4444;
+    -success: #16a34a;
+    -radius: 8px;
+}
+
+/* Login screen styles */
+.login-pane {
+    -fx-background-color: -background;
+}
+
+.login-box {
+    -fx-background-color: -background;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 1);
+    -fx-padding: 24px;
+}
+
+.login-title {
+    -fx-text-fill: -foreground;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+.login-subtitle {
+    -fx-text-fill: -muted-foreground;
+    -fx-font-size: 14px;
+}
+
+.input-label {
+    -fx-text-fill: -foreground;
+    -fx-font-weight: 500;
+    -fx-font-size: 14px;
+}
+
+.text-field, .password-field {
+    -fx-background-color: -background;
+    -fx-border-color: -border;
+    -fx-border-radius: -radius;
+    -fx-background-radius: -radius;
+    -fx-padding: 10px 12px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: -primary;
+    -fx-border-width: 2px;
+}
+
+.login-button {
+    -fx-background-color: -primary;
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-padding: 10px 16px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.login-button:hover {
+    -fx-background-color: -primary-hover;
+}
+
+.cancel-button {
+    -fx-background-color: -background-muted;
+    -fx-text-fill: -foreground;
+    -fx-font-weight: 500;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-padding: 10px 16px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: -border;
+}
+
+.error-label {
+    -fx-text-fill: -error;
+    -fx-font-size: 13px;
+    -fx-padding: 4px 0;
+}
+
+/* Main application styles */
+.tab-pane {
+    -fx-tab-min-width: 120px;
+    -fx-tab-min-height: 40px;
+    -fx-background-color: transparent;
+    -fx-tab-max-height: 40px;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0 20px;
+}
+
+.tab:selected {
+    -fx-background-color: -background;
+    -fx-border-color: -primary;
+    -fx-border-width: 0 0 2 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-font-weight: 500;
+    -fx-text-fill: -muted-foreground;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: -primary;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+}
+
+.table-view {
+    -fx-background-color: -background;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -background-muted;
+    -fx-background-radius: -radius -radius 0 0;
+    -fx-padding: 0 0 8px 0;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -border;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -foreground;
+    -fx-font-weight: 500;
+    -fx-padding: 12px;
+    -fx-alignment: center-left;
+}
+
+.table-row-cell {
+    -fx-background-color: -background;
+    -fx-border-color: -border;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 4px 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -background;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(0, 112, 243, 0.1);
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-alignment: center-left;
+    -fx-padding: 12px;
+}
+
+.list-view {
+    -fx-background-color: -background;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-padding: 4px;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 12px;
+    -fx-background-radius: -radius;
+}
+
+.list-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.list-cell:selected {
+    -fx-background-color: rgba(0, 112, 243, 0.1);
+    -fx-text-fill: -foreground;
+}
+
+.list-cell:hover {
+    -fx-background-color: -background-muted;
+}
+
+/* Admin dashboard styles */
+.admin-pane, .admin-panel {
+    -fx-background-color: -background;
+    -fx-padding: 24px;
+}
+
+.admin-sidebar {
+    -fx-background-color: -primary;
+    -fx-padding: 24px 16px;
+    -fx-spacing: 8px;
+}
+
+.admin-menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+    -fx-alignment: baseline-left;
+    -fx-padding: 12px 16px;
+    -fx-background-radius: -radius;
+    -fx-cursor: hand;
+}
+
+.admin-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-menu-button.active {
+    -fx-background-color: white;
+    -fx-text-fill: -primary;
+}
+
+.admin-title, .header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -foreground;
+}
+
+.admin-card {
+    -fx-background-color: -background;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 1);
+    -fx-padding: 20px;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -foreground;
+    -fx-padding: 8px 0;
+}
+
+/* Buttons */
+.btn-primary, .action-button {
+    -fx-background-color: -primary;
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-padding: 10px 16px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.btn-primary:hover, .action-button:hover {
+    -fx-background-color: -primary-hover;
+}
+
+.btn-secondary {
+    -fx-background-color: -background;
+    -fx-text-fill: -foreground;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-padding: 10px 16px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -background-muted;
+}
+
+.btn-danger {
+    -fx-background-color: -error;
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+    -fx-background-radius: -radius;
+    -fx-border-radius: -radius;
+    -fx-padding: 10px 16px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.btn-danger:hover {
+    -fx-background-color: derive(-error, -15%);
+}
+
+/* Status bar */
+.status-bar {
+    -fx-background-color: -background-muted;
+    -fx-border-color: -border;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.status-label {
+    -fx-text-fill: -muted-foreground;
+    -fx-font-size: 12px;
+}
+
+/* Top bar */
+.top-bar {
+    -fx-background-color: -background;
+    -fx-border-color: -border;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.app-title {
+    -fx-text-fill: -foreground;
+    -fx-font-weight: 600;
+}
+
+/* Dialog styling */
+.dialog-pane {
+    -fx-background-color: -background;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: -background-muted;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: -foreground;
+    -fx-font-weight: 600;
+}
+
+/* ComboBox and other controls */
+.combo-box {
+    -fx-background-color: -background;
+    -fx-border-color: -border;
+    -fx-border-radius: -radius;
+    -fx-background-radius: -radius;
+}
+
+.combo-box:focused {
+    -fx-border-color: -primary;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 8px 12px;
+}
+
+.separator {
+    -fx-background-color: -border;
+}
+
+.titled-pane {
+    -fx-text-fill: -foreground;
+}
+
+.titled-pane > .title {
+    -fx-background-color: -background-muted;
+    -fx-background-radius: -radius -radius 0 0;
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-border-radius: -radius -radius 0 0;
+    -fx-padding: 10px;
+}
+
+.titled-pane > .content {
+    -fx-background-color: -background;
+    -fx-border-color: -border;
+    -fx-border-width: 0 1px 1px 1px;
+    -fx-border-radius: 0 0 -radius -radius;
+    -fx-padding: 16px;
+} 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="login-pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookify.app.controller.LoginController">
+   <center>
+      <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0" styleClass="login-box" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="login-title" text="Travel Agency Admin">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label styleClass="login-subtitle" text="Please enter your credentials to continue">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <VBox spacing="10.0">
+               <children>
+                  <Label styleClass="input-label" text="Username">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameField" promptText="Enter username" styleClass="text-field" />
+               </children>
+            </VBox>
+            <VBox spacing="10.0">
+               <children>
+                  <Label styleClass="input-label" text="Password">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="passwordField" promptText="Enter password" styleClass="text-field" />
+               </children>
+            </VBox>
+            <Label fx:id="errorLabel" styleClass="error-label" text="Invalid username or password" visible="false">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#login" styleClass="login-button" text="Login">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cancel" styleClass="cancel-button" text="Cancel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         <effect>
+            <DropShadow />
+         </effect>
+      </VBox>
+   </center>
+</BorderPane> 
