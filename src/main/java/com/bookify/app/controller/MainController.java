@@ -40,6 +40,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainController {
@@ -144,6 +145,26 @@ public class MainController {
     // Admin authentication
     private boolean isAdminAuthenticated = false;
 
+    // Dashboard components
+    @FXML
+    private Label dashboardDestinationsCount;
+    @FXML
+    private Label dashboardCustomersCount;
+    @FXML
+    private Label dashboardBookingsCount;
+    @FXML
+    private TableView<Booking> dashboardUpcomingBookingsTable;
+    @FXML
+    private TableColumn<Booking, Integer> dashboardBookingIdColumn;
+    @FXML
+    private TableColumn<Booking, String> dashboardBookingCustomerColumn;
+    @FXML
+    private TableColumn<Booking, String> dashboardBookingDestinationColumn;
+    @FXML
+    private TableColumn<Booking, String> dashboardBookingTravelDateColumn;
+    @FXML
+    private TableColumn<Booking, String> dashboardBookingStatusColumn;
+
     @FXML
     public void initialize() {
         // Initialize DAOs
@@ -165,6 +186,9 @@ public class MainController {
         // Load initial data
         loadData();
 
+        // Update dashboard with real data
+        updateDashboard();
+
         updateStatus("Application initialized successfully!");
     }
 
@@ -183,6 +207,13 @@ public class MainController {
         bookingPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfPeople"));
         bookingPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         bookingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        // Dashboard upcoming bookings table
+        dashboardBookingIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        dashboardBookingCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        dashboardBookingDestinationColumn.setCellValueFactory(new PropertyValueFactory<>("destinationName"));
+        dashboardBookingTravelDateColumn.setCellValueFactory(new PropertyValueFactory<>("travelDate"));
+        dashboardBookingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
     private void setupListeners() {
@@ -497,10 +528,46 @@ public class MainController {
 
     @FXML
     private void newBooking() {
-        // This would normally open a dialog to create a new booking
-        showAlert(Alert.AlertType.INFORMATION, "Information", "New Booking",
-                "This feature will open a dialog to create a new booking.");
-        updateStatus("Creating new booking");
+        try {
+            // Load the booking dialog
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/booking_dialog.fxml"));
+            Parent dialogRoot = loader.load();
+
+            // Get the controller
+            BookingDialogController controller = loader.getController();
+
+            // Set callback for when the dialog is completed
+            controller.setCallback(new BookingDialogController.BookingDialogCallback() {
+                @Override
+                public void onBookingSaved(Booking booking) {
+                    // Add the new booking to the list and refresh
+                    bookings.add(booking);
+                    updateDashboard();
+                    updateStatus("New booking created successfully");
+                }
+
+                @Override
+                public void onDialogCancelled() {
+                    updateStatus("Booking creation cancelled");
+                }
+            });
+
+            // Create and show the dialog
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("New Booking");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(bookingsTable.getScene().getWindow());
+
+            Scene scene = new Scene(dialogRoot);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Dialog Error",
+                    "Error creating new booking dialog: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -510,10 +577,53 @@ public class MainController {
                     "Please select a booking to edit.");
             return;
         }
-        // This would normally open a dialog to edit the booking
-        showAlert(Alert.AlertType.INFORMATION, "Information", "Edit Booking",
-                "This feature will open a dialog to edit booking #" + selectedBooking.getId());
-        updateStatus("Editing booking #" + selectedBooking.getId());
+
+        try {
+            // Load the booking dialog
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/booking_dialog.fxml"));
+            Parent dialogRoot = loader.load();
+
+            // Get the controller
+            BookingDialogController controller = loader.getController();
+
+            // Set the booking to edit
+            controller.setBooking(selectedBooking);
+
+            // Set callback for when the dialog is completed
+            controller.setCallback(new BookingDialogController.BookingDialogCallback() {
+                @Override
+                public void onBookingSaved(Booking booking) {
+                    // Update the booking in the list and refresh
+                    int index = bookings.indexOf(selectedBooking);
+                    if (index >= 0) {
+                        bookings.set(index, booking);
+                    }
+                    updateDashboard();
+                    updateStatus("Booking #" + booking.getId() + " updated successfully");
+                }
+
+                @Override
+                public void onDialogCancelled() {
+                    updateStatus("Booking edit cancelled");
+                }
+            });
+
+            // Create and show the dialog
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Booking #" + selectedBooking.getId());
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(bookingsTable.getScene().getWindow());
+
+            Scene scene = new Scene(dialogRoot);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Dialog Error",
+                    "Error creating edit booking dialog: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -1149,5 +1259,53 @@ public class MainController {
     // Helper method to format dates
     private String formatDate(LocalDate date) {
         return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    /**
+     * Updates the dashboard with real-time data
+     */
+    private void updateDashboard() {
+        try {
+            // Update statistics counters with real data
+            int destinationCount = destinations.size();
+            int customerCount = customers.size();
+            int bookingCount = bookings.size();
+
+            dashboardDestinationsCount.setText(destinationCount + " available");
+            dashboardCustomersCount.setText(customerCount + " registered");
+            dashboardBookingsCount.setText(bookingCount + " total");
+
+            // Get upcoming bookings (those with status "Pending" or "Confirmed")
+            List<Booking> upcomingBookings = bookings.stream()
+                    .filter(b -> b.getStatus().equals("Pending") || b.getStatus().equals("Confirmed"))
+                    .sorted((b1, b2) -> b1.getTravelDate().compareTo(b2.getTravelDate()))
+                    .limit(10) // Show only the next 10 bookings
+                    .collect(Collectors.toList());
+
+            // Update the dashboard table
+            dashboardUpcomingBookingsTable.setItems(FXCollections.observableArrayList(upcomingBookings));
+
+            updateStatus("Dashboard updated with real-time data");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Dashboard Update Error",
+                    "An error occurred while updating the dashboard: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void refreshDashboard() {
+        try {
+            // Reload all data from the database
+            loadData();
+
+            // Update the dashboard
+            updateDashboard();
+
+            updateStatus("Dashboard refreshed successfully");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Refresh Error",
+                    "An error occurred while refreshing data: " + e.getMessage());
+        }
     }
 }

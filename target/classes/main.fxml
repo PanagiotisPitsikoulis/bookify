@@ -61,21 +61,35 @@
                   <VBox styleClass="dashboard-card" alignment="CENTER" prefWidth="220" prefHeight="240">
                     <Label text="✈️" style="-fx-font-size: 60px;" />
                     <Label text="Destinations" styleClass="card-title" style="-fx-font-size: 20px;" />
-                    <Label text="30 available" styleClass="card-subtitle" />
+                    <Label fx:id="dashboardDestinationsCount" styleClass="card-subtitle" />
                   </VBox>
                   
                   <VBox styleClass="dashboard-card" alignment="CENTER" prefWidth="220" prefHeight="240">
                     <Label text="👥" style="-fx-font-size: 60px;" />
                     <Label text="Customers" styleClass="card-title" style="-fx-font-size: 20px;" />
-                    <Label text="100 registered" styleClass="card-subtitle" />
+                    <Label fx:id="dashboardCustomersCount" styleClass="card-subtitle" />
                   </VBox>
                   
                   <VBox styleClass="dashboard-card" alignment="CENTER" prefWidth="220" prefHeight="240">
                     <Label text="📋" style="-fx-font-size: 60px;" />
                     <Label text="Bookings" styleClass="card-title" style="-fx-font-size: 20px;" />
-                    <Label text="200 total" styleClass="card-subtitle" />
+                    <Label fx:id="dashboardBookingsCount" styleClass="card-subtitle" />
                   </VBox>
                 </HBox>
+                
+                <VBox styleClass="admin-card" spacing="15" maxWidth="800">
+                  <Label text="Upcoming Bookings" styleClass="section-title" />
+                  <TableView fx:id="dashboardUpcomingBookingsTable" VBox.vgrow="ALWAYS" styleClass="selection-table" prefHeight="200">
+                    <columns>
+                      <TableColumn fx:id="dashboardBookingIdColumn" prefWidth="50.0" text="ID" />
+                      <TableColumn fx:id="dashboardBookingCustomerColumn" prefWidth="150.0" text="Customer" />
+                      <TableColumn fx:id="dashboardBookingDestinationColumn" prefWidth="150.0" text="Destination" />
+                      <TableColumn fx:id="dashboardBookingTravelDateColumn" prefWidth="100.0" text="Travel Date" />
+                      <TableColumn fx:id="dashboardBookingStatusColumn" prefWidth="100.0" text="Status" />
+                    </columns>
+                  </TableView>
+                  <Button mnemonicParsing="false" onAction="#refreshDashboard" styleClass="btn-secondary" text="Refresh Data" />
+                </VBox>
               </VBox>
             </content>
           </Tab>
@@ -287,7 +301,7 @@
                                <HBox alignment="CENTER" spacing="15.0">
                                   <children>
                                      <Button mnemonicParsing="false" onAction="#newBooking" styleClass="btn-primary" text="New Booking" />
-                                     <Button mnemonicParsing="false" styleClass="btn-secondary" text="Edit" disable="true" />
+                                     <Button mnemonicParsing="false" onAction="#editBooking" styleClass="btn-secondary" text="Edit" />
                                      <Button mnemonicParsing="false" onAction="#deleteBooking" styleClass="btn-danger" text="Delete" />
                                      <Button mnemonicParsing="false" onAction="#changeBookingStatus" styleClass="btn-secondary" text="Change Status" />
                                   </children>
