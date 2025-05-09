@@ -1,96 +1,271 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.bookify.app.controller.AdminController"
-      spacing="15" styleClass="admin-panel">
+      styleClass="admin-pane"
+      stylesheets="@styles.css"
+      maxHeight="Infinity" maxWidth="Infinity">
     
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
-    
-    <HBox alignment="CENTER_LEFT" spacing="10">
-        <Label text="Admin Dashboard" styleClass="header-label"/>
-        <Pane HBox.hgrow="ALWAYS" />
-        <Button text="Logout" onAction="#logout" styleClass="action-button"/>
-    </HBox>
-    
-    <Separator />
-    
-    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-        <Tab text="User Management">
-            <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER_LEFT">
-                    <TextField fx:id="userSearchField" promptText="Search users..." HBox.hgrow="ALWAYS"/>
-                    <Button text="Search" onAction="#searchUsers"/>
-                    <Button text="Add User" onAction="#showAddUserDialog"/>
-                </HBox>
-                
-                <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TableColumn fx:id="userIdColumn" text="ID" prefWidth="50"/>
-                        <TableColumn fx:id="usernameColumn" text="Username" prefWidth="150"/>
-                        <TableColumn fx:id="userRoleColumn" text="Role" prefWidth="100"/>
-                        <TableColumn fx:id="userStatusColumn" text="Status" prefWidth="100"/>
-                        <TableColumn fx:id="userActionsColumn" text="Actions" prefWidth="150"/>
-                    </columns>
-                </TableView>
+    <left>
+        <VBox styleClass="admin-sidebar" prefWidth="260" spacing="15">
+            <VBox alignment="CENTER" spacing="20" style="-fx-padding: 0 0 40 0;">
+                <Label text="BOOKIFY ADMIN" styleClass="app-title">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.05" />
+                    </effect>
+                </Label>
             </VBox>
-        </Tab>
-        
-        <Tab text="System Settings">
-            <GridPane vgap="10" hgap="10">
+            
+            <Separator style="-fx-background-color: transparent; -fx-border-color: #45475A; -fx-border-width: 0.5;"/>
+            
+            <Button text="Dashboard" fx:id="dashboardButton" onAction="#showDashboard" styleClass="admin-menu-button, active">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <fx:include source="assets/icons/dashboard.svg" />
+                    </HBox>
+                </graphic>
                 <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
                 </padding>
-                
-                <Label text="Company Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="companyNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                
-                <Label text="Email Template:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextArea fx:id="emailTemplateField" prefHeight="100" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                
-                <Label text="Backup Frequency:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="backupFrequencyCombo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                
-                <HBox alignment="CENTER_RIGHT" spacing="10" GridPane.rowIndex="3" GridPane.columnIndex="1">
-                    <Button text="Save Settings" onAction="#saveSettings"/>
-                    <Button text="Reset" onAction="#resetSettings"/>
-                </HBox>
-            </GridPane>
-        </Tab>
-        
-        <Tab text="Database">
-            <VBox spacing="15">
+            </Button>
+            <Button text="User Management" fx:id="usersButton" onAction="#showUsers" styleClass="admin-menu-button">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <fx:include source="assets/icons/user.svg" />
+                    </HBox>
+                </graphic>
                 <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
                 </padding>
+            </Button>
+            <Button text="Destinations" fx:id="systemButton" onAction="#showSystem" styleClass="admin-menu-button">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <fx:include source="assets/icons/travel.svg" />
+                    </HBox>
+                </graphic>
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+            </Button>
+            <Button text="Bookings" fx:id="backupButton" onAction="#showBackup" styleClass="admin-menu-button">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <fx:include source="assets/icons/calendar.svg" />
+                    </HBox>
+                </graphic>
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+            </Button>
+            <Button text="Reports" fx:id="reportsButton" onAction="#showReports" styleClass="admin-menu-button">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <fx:include source="assets/icons/settings.svg" />
+                    </HBox>
+                </graphic>
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+            </Button>
+            
+            <Pane VBox.vgrow="ALWAYS" />
+            
+            <Button text="Logout" onAction="#logout" styleClass="admin-menu-button">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <fx:include source="assets/icons/logout.svg" />
+                    </HBox>
+                </graphic>
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+            </Button>
+            
+            <padding>
+                <Insets top="30" right="15" bottom="30" left="15"/>
+            </padding>
+        </VBox>
+    </left>
+    
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <padding>
+                <Insets top="20" right="30" bottom="20" left="30"/>
+            </padding>
+            
+            <Label text="Dashboard" styleClass="admin-title"/>
+            
+            <Pane HBox.hgrow="ALWAYS" />
+        </HBox>
+    </top>
+    
+    <center>
+        <ScrollPane styleClass="admin-scroll" fitToWidth="true" fitToHeight="true" pannable="true">
+            <VBox spacing="40" style="-fx-padding: 40;">
+                <!-- Dashboard Overview Section -->
+                <VBox spacing="25">
+                    <Label text="Overview" styleClass="admin-title"/>
+                    
+                    <HBox spacing="25">
+                        <VBox styleClass="dashboard-card" prefWidth="240" prefHeight="140">
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <fx:include source="assets/icons/user.svg" />
+                                <VBox>
+                                    <Label text="Total Customers" styleClass="card-title"/>
+                                    <Label text="256" styleClass="card-value"/>
+                                    <Label text="↑ 12% from last month" styleClass="card-subtitle" textFill="#A6E3A1"/>
+                                </VBox>
+                            </HBox>
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                        </VBox>
+                        
+                        <VBox styleClass="dashboard-card" prefWidth="240" prefHeight="140">
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <fx:include source="assets/icons/calendar.svg" />
+                                <VBox>
+                                    <Label text="Total Bookings" styleClass="card-title"/>
+                                    <Label text="128" styleClass="card-value"/>
+                                    <Label text="↑ 8% from last month" styleClass="card-subtitle" textFill="#A6E3A1"/>
+                                </VBox>
+                            </HBox>
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                        </VBox>
+                        
+                        <VBox styleClass="dashboard-card" prefWidth="240" prefHeight="140">
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <fx:include source="assets/icons/travel.svg" />
+                                <VBox>
+                                    <Label text="Popular Destinations" styleClass="card-title"/>
+                                    <Label text="32" styleClass="card-value"/>
+                                    <Label text="Most popular: Greece" styleClass="card-subtitle"/>
+                                </VBox>
+                            </HBox>
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                        </VBox>
+                        
+                        <VBox styleClass="dashboard-card" prefWidth="240" prefHeight="140">
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <Label text="💰" style="-fx-font-size: 32px;"/>
+                                <VBox>
+                                    <Label text="Revenue" styleClass="card-title"/>
+                                    <Label text="$12,450" styleClass="card-value"/>
+                                    <Label text="↑ 15% from last month" styleClass="card-subtitle" textFill="#A6E3A1"/>
+                                </VBox>
+                            </HBox>
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                        </VBox>
+                    </HBox>
+                </VBox>
                 
-                <HBox spacing="10">
-                    <Button text="Backup Database" onAction="#backupDatabase"/>
-                    <Button text="Restore Database" onAction="#restoreDatabase"/>
-                </HBox>
+                <!-- Recent Bookings Section -->
+                <VBox spacing="25">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Recent Bookings" styleClass="admin-title"/>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Button text="View All" styleClass="btn-secondary"/>
+                    </HBox>
+                    
+                    <VBox styleClass="admin-card">
+                        <TableView fx:id="recentBookingsTable" VBox.vgrow="ALWAYS" maxHeight="300">
+                            <columns>
+                                <TableColumn fx:id="bookingIdColumn" text="ID" prefWidth="70"/>
+                                <TableColumn fx:id="customerColumn" text="Customer" prefWidth="180"/>
+                                <TableColumn fx:id="destinationColumn" text="Destination" prefWidth="180"/>
+                                <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
+                                <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+                                <TableColumn fx:id="amountColumn" text="Amount" prefWidth="120"/>
+                            </columns>
+                            <placeholder>
+                                <Label text="No bookings available" style="-fx-text-fill: #A6ADC8;"/>
+                            </placeholder>
+                        </TableView>
+                        <padding>
+                            <Insets top="25" right="25" bottom="25" left="25"/>
+                        </padding>
+                    </VBox>
+                </VBox>
                 
-                <TitledPane text="Database Statistics" expanded="true">
-                    <GridPane vgap="5" hgap="10">
-                        <Label text="Total Customers:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                        <Label fx:id="totalCustomersLabel" text="0" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <!-- Popular Destinations Section -->
+                <VBox spacing="25">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Popular Destinations" styleClass="admin-title"/>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Button text="View All" styleClass="btn-secondary"/>
+                    </HBox>
+                    
+                    <HBox spacing="25">
+                        <VBox styleClass="admin-card" prefWidth="320" prefHeight="200">
+                            <Label text="🏝️" style="-fx-font-size: 40px;"/>
+                            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 15 0 0 0;">
+                                <Label text="Santorini, Greece" styleClass="card-title"/>
+                                <Pane HBox.hgrow="ALWAYS" />
+                                <Label text="$1,200" styleClass="card-title" textFill="#F5C2E7"/>
+                            </HBox>
+                            <Label text="42 bookings this month" styleClass="card-subtitle"/>
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                        </VBox>
                         
-                        <Label text="Total Destinations:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                        <Label fx:id="totalDestinationsLabel" text="0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        <VBox styleClass="admin-card" prefWidth="320" prefHeight="200">
+                            <Label text="🌴" style="-fx-font-size: 40px;"/>
+                            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 15 0 0 0;">
+                                <Label text="Bali, Indonesia" styleClass="card-title"/>
+                                <Pane HBox.hgrow="ALWAYS" />
+                                <Label text="$1,450" styleClass="card-title" textFill="#F5C2E7"/>
+                            </HBox>
+                            <Label text="38 bookings this month" styleClass="card-subtitle"/>
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                        </VBox>
                         
-                        <Label text="Total Bookings:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                        <Label fx:id="totalBookingsLabel" text="0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                        
-                        <Label text="Last Backup:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                        <Label fx:id="lastBackupLabel" text="Never" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-                    </GridPane>
-                </TitledPane>
+                        <VBox styleClass="admin-card" prefWidth="320" prefHeight="200">
+                            <Label text="🗼" style="-fx-font-size: 40px;"/>
+                            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 15 0 0 0;">
+                                <Label text="Paris, France" styleClass="card-title"/>
+                                <Pane HBox.hgrow="ALWAYS" />
+                                <Label text="$980" styleClass="card-title" textFill="#F5C2E7"/>
+                            </HBox>
+                            <Label text="35 bookings this month" styleClass="card-subtitle"/>
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                        </VBox>
+                    </HBox>
+                </VBox>
             </VBox>
-        </Tab>
-    </TabPane>
-</VBox> 
+        </ScrollPane>
+    </center>
+    
+    <bottom>
+        <HBox alignment="CENTER_LEFT" styleClass="status-bar">
+            <padding>
+                <Insets top="12" right="20" bottom="12" left="20"/>
+            </padding>
+            <Label text="Bookify Travel Agency" styleClass="status-label"/>
+            <Pane HBox.hgrow="ALWAYS" />
+            <Label fx:id="statusLabel" text="Connected to database" styleClass="status-label"/>
+        </HBox>
+    </bottom>
+</BorderPane> 

@@ -1,6 +1,10 @@
 package com.bookify.app;
 
+import java.io.IOException;
+
 import com.bookify.app.database.DatabaseConnection;
+import com.bookify.app.database.SampleDataGenerator;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class MainApp extends Application {
 
     @Override
@@ -19,57 +21,66 @@ public class MainApp extends Application {
         Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
             System.err.println("Uncaught exception in thread: " + thread.getName());
             throwable.printStackTrace();
-            
+
             Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, 
-                    "An unexpected error occurred: " + throwable.getMessage(), 
-                    ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "An unexpected error occurred: " + throwable.getMessage(),
+                        ButtonType.OK);
                 alert.showAndWait();
             });
         });
-        
+
         try {
             System.out.println("Starting application...");
-            
-            // Start with the main application instead of login
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
-            Parent root = loader.load();
-            
-            // Set up the scene
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Travel Agency Booking System");
-            primaryStage.setWidth(1000);
-            primaryStage.setHeight(700);
-            primaryStage.centerOnScreen();
-            primaryStage.show();
-            
-            System.out.println("JavaFX application started successfully");
-        } catch (IOException e) {
-            System.err.println("Error loading FXML: " + e.getMessage());
-            e.printStackTrace();
-            
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, 
-                    "Failed to load application UI: " + e.getMessage(), 
-                    ButtonType.OK);
-                alert.showAndWait();
-                Platform.exit();
-            });
+
+            // Load FXML with more detailed error handling
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/main.fxml"));
+
+            try {
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+                primaryStage.setTitle("Travel Agency Booking System");
+                primaryStage.setWidth(1000);
+                primaryStage.setHeight(700);
+                primaryStage.centerOnScreen();
+                primaryStage.show();
+
+                System.out.println("JavaFX application started successfully");
+
+            } catch (IOException ex) {
+                System.err.println("Error loading FXML: " + ex.getMessage());
+                ex.printStackTrace();
+
+                Platform.runLater(() -> {
+                    String errorDetails = "Error: " + ex.getMessage();
+                    if (ex.getCause() != null) {
+                        errorDetails += "\nCaused by: " + ex.getCause().getMessage();
+                    }
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            "Failed to load UI: " + errorDetails,
+                            ButtonType.OK);
+                    alert.showAndWait();
+                    Platform.exit();
+                });
+            }
+
         } catch (Exception e) {
             System.err.println("Critical application error: " + e.getMessage());
             e.printStackTrace();
-            
+
             Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, 
-                    "Critical application error: " + e.getMessage(), 
-                    ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "Critical application error: " + e.getMessage(),
+                        ButtonType.OK);
                 alert.showAndWait();
                 Platform.exit();
             });
         }
     }
-    
+
     @Override
     public void stop() {
         // Close database connection when application closes
@@ -86,7 +97,12 @@ public class MainApp extends Application {
         try {
             // Establish database connection
             DatabaseConnection.getConnection();
-            
+
+            // Generate sample data if needed
+            if (args.length > 0 && args[0].equals("--generate-data")) {
+                SampleDataGenerator.generateSampleData();
+            }
+
             // Launch JavaFX application
             launch(args);
         } catch (Exception e) {
@@ -94,4 +110,4 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-} 
+}

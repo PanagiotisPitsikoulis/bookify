@@ -1,37 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -50,382 +17,357 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookify.app.controller.MainController">
+<BorderPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="900.0" 
+            stylesheets="@styles.css" style="-fx-background-color: -base;" 
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.bookify.app.controller.MainController">
    <top>
-      <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-bar" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-bar">
          <children>
-            <Label styleClass="app-title" text="Travel Agency Booking System">
+            <Label text="✈️" style="-fx-font-size: 24px;"/>
+            <Label styleClass="app-title" text="BOOKIFY TRAVEL AGENCY">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#showAdminLogin" styleClass="btn-primary" text="Admin Login" />
-               </children>
-            </HBox>
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#showAdminLogin" styleClass="btn-primary" text="Admin Panel" />
          </children>
          <padding>
-            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
          </padding>
+         <effect>
+            <DropShadow color="#00000040" height="10.0" radius="4.5" width="10.0" />
+         </effect>
       </HBox>
    </top>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE">
         <tabs>
+          <Tab text="Dashboard">
+            <content>
+              <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30px;">
+                <Label text="Bookify Travel Agency" style="-fx-font-size: 32px; -fx-font-weight: bold;" />
+                <Label text="Welcome to the Bookify Travel Agency booking system" style="-fx-font-size: 18px;" />
+                
+                <HBox alignment="CENTER" spacing="40" style="-fx-padding: 40px 0px;">
+                  <VBox styleClass="dashboard-card" alignment="CENTER" prefWidth="220" prefHeight="240">
+                    <Label text="✈️" style="-fx-font-size: 60px;" />
+                    <Label text="Destinations" styleClass="card-title" style="-fx-font-size: 20px;" />
+                    <Label text="30 available" styleClass="card-subtitle" />
+                  </VBox>
+                  
+                  <VBox styleClass="dashboard-card" alignment="CENTER" prefWidth="220" prefHeight="240">
+                    <Label text="👥" style="-fx-font-size: 60px;" />
+                    <Label text="Customers" styleClass="card-title" style="-fx-font-size: 20px;" />
+                    <Label text="100 registered" styleClass="card-subtitle" />
+                  </VBox>
+                  
+                  <VBox styleClass="dashboard-card" alignment="CENTER" prefWidth="220" prefHeight="240">
+                    <Label text="📋" style="-fx-font-size: 60px;" />
+                    <Label text="Bookings" styleClass="card-title" style="-fx-font-size: 20px;" />
+                    <Label text="200 total" styleClass="card-subtitle" />
+                  </VBox>
+                </HBox>
+              </VBox>
+            </content>
+          </Tab>
+          
           <Tab text="Customers">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <left>
-                              <VBox prefHeight="200.0" prefWidth="300.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label text="Search:">
-                                             <font>
-                                                <Font name="System Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="customerSearchField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                                    <HBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#addCustomer" styleClass="btn-primary" text="Add" />
-                                          <Button mnemonicParsing="false" onAction="#editCustomer" styleClass="btn-secondary" text="Edit" />
-                                          <Button mnemonicParsing="false" onAction="#deleteCustomer" styleClass="btn-danger" text="Delete" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </VBox>
-                           </left>
-                           <center>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Label styleClass="section-title" text="Customer Details">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Name:" />
-                                          <TextField fx:id="customerNameField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Email:" />
-                                          <TextField fx:id="customerEmailField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Phone:" />
-                                          <TextField fx:id="customerPhoneField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Address:" />
-                                          <TextField fx:id="customerAddressField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#saveCustomer" styleClass="btn-primary" text="Save" />
-                                          <Button mnemonicParsing="false" onAction="#resetCustomerForm" styleClass="btn-secondary" text="Reset" />
-                                       </children>
-                                    </HBox>
-                                    <Label styleClass="section-title" text="Customer Bookings">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <TableView fx:id="customerBookingsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                      <columns>
-                                        <TableColumn fx:id="customerBookingIdColumn" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="customerBookingDestinationColumn" prefWidth="120.0" text="Destination" />
-                                          <TableColumn fx:id="customerBookingDateColumn" prefWidth="100.0" text="Travel Date" />
-                                          <TableColumn fx:id="customerBookingStatusColumn" prefWidth="100.0" text="Status" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </VBox>
-                           </center>
-                        </BorderPane>
-                     </children>
-                  </AnchorPane>
+              <AnchorPane>
+                <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                   <left>
+                     <VBox prefWidth="350.0" spacing="15.0" BorderPane.alignment="CENTER">
+                       <children>
+                         <VBox VBox.vgrow="ALWAYS" styleClass="admin-card">
+                           <ListView fx:id="customerListView" VBox.vgrow="ALWAYS" styleClass="selection-list" />
+                         </VBox>
+                         <HBox alignment="CENTER" spacing="15.0">
+                           <children>
+                             <Button mnemonicParsing="false" onAction="#addCustomer" styleClass="btn-primary" text="Add" />
+                             <Button mnemonicParsing="false" onAction="#editCustomer" styleClass="btn-secondary" text="Edit" />
+                             <Button mnemonicParsing="false" onAction="#deleteCustomer" styleClass="btn-danger" text="Delete" />
+                           </children>
+                         </HBox>
+                       </children>
+                       <padding>
+                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                       </padding>
+                     </VBox>
+                   </left>
+                   <center>
+                      <VBox spacing="15.0">
+                         <children>
+                            <Label styleClass="section-title" text="Customer Details">
+                               <font>
+                                  <Font name="System Bold" size="18.0" />
+                               </font>
+                            </Label>
+                            <VBox spacing="15.0" styleClass="admin-card">
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Full Name:" />
+                                     <TextField fx:id="customerNameField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Email Address:" />
+                                     <TextField fx:id="customerEmailField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Phone Number:" />
+                                     <TextField fx:id="customerPhoneField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Address:" />
+                                     <TextField fx:id="customerAddressField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                                  <children>
+                                     <Button mnemonicParsing="false" onAction="#saveCustomer" styleClass="btn-primary" text="Save Changes" />
+                                     <Button mnemonicParsing="false" onAction="#resetCustomerForm" styleClass="btn-secondary" text="Reset Form" />
+                                  </children>
+                                  <VBox.margin>
+                                     <Insets top="10.0" />
+                                  </VBox.margin>
+                               </HBox>
+                               <padding>
+                                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                               </padding>
+                            </VBox>
+                            <Label styleClass="section-title" text="Customer Bookings">
+                               <font>
+                                  <Font name="System Bold" size="18.0" />
+                               </font>
+                            </Label>
+                            <VBox VBox.vgrow="ALWAYS" styleClass="admin-card">
+                               <TableView fx:id="customerBookingsTable" VBox.vgrow="ALWAYS" styleClass="selection-table">
+                                 <columns>
+                                   <TableColumn fx:id="customerBookingIdColumn" prefWidth="75.0" text="ID" />
+                                   <TableColumn fx:id="customerBookingDestinationColumn" prefWidth="150.0" text="Destination" />
+                                   <TableColumn fx:id="customerBookingDateColumn" prefWidth="120.0" text="Travel Date" />
+                                   <TableColumn fx:id="customerBookingStatusColumn" prefWidth="120.0" text="Status" />
+                                 </columns>
+                               </TableView>
+                               <padding>
+                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                               </padding>
+                            </VBox>
+                         </children>
+                         <padding>
+                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                         </padding>
+                      </VBox>
+                   </center>
+                </BorderPane>
+              </AnchorPane>
             </content>
           </Tab>
+          
           <Tab text="Destinations">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <left>
-                              <VBox prefHeight="200.0" prefWidth="300.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label text="Search:">
-                                             <font>
-                                                <Font name="System Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="destinationSearchField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <ListView fx:id="destinationListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                                    <HBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#addDestination" styleClass="btn-primary" text="Add" />
-                                          <Button mnemonicParsing="false" onAction="#editDestination" styleClass="btn-secondary" text="Edit" />
-                                          <Button mnemonicParsing="false" onAction="#deleteDestination" styleClass="btn-danger" text="Delete" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </VBox>
-                           </left>
-                           <center>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Label styleClass="section-title" text="Destination Details">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Name:" />
-                                          <TextField fx:id="destinationNameField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Country:" />
-                                          <TextField fx:id="destinationCountryField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Description:" />
-                                          <TextField fx:id="destinationDescriptionField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label prefWidth="100.0" text="Price per Person:" />
-                                          <TextField fx:id="destinationPriceField" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#saveDestination" styleClass="btn-primary" text="Save" />
-                                          <Button mnemonicParsing="false" onAction="#resetDestinationForm" styleClass="btn-secondary" text="Reset" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </VBox>
-                           </center>
-                        </BorderPane>
-                     </children>
-                  </AnchorPane>
+              <AnchorPane>
+                <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                   <left>
+                     <VBox prefWidth="350.0" spacing="15.0">
+                       <children>
+                         <VBox VBox.vgrow="ALWAYS" styleClass="admin-card">
+                           <ListView fx:id="destinationListView" VBox.vgrow="ALWAYS" styleClass="selection-list" />
+                         </VBox>
+                         <HBox alignment="CENTER" spacing="15.0">
+                           <children>
+                             <Button mnemonicParsing="false" onAction="#addDestination" styleClass="btn-primary" text="Add" />
+                             <Button mnemonicParsing="false" onAction="#editDestination" styleClass="btn-secondary" text="Edit" />
+                             <Button mnemonicParsing="false" onAction="#deleteDestination" styleClass="btn-danger" text="Delete" />
+                           </children>
+                         </HBox>
+                       </children>
+                       <padding>
+                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                       </padding>
+                     </VBox>
+                   </left>
+                   <center>
+                      <VBox spacing="15.0">
+                         <children>
+                            <Label styleClass="section-title" text="Destination Details">
+                               <font>
+                                  <Font name="System Bold" size="18.0" />
+                               </font>
+                            </Label>
+                            <VBox spacing="15.0" styleClass="admin-card">
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Name:" />
+                                     <TextField fx:id="destinationNameField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Country:" />
+                                     <TextField fx:id="destinationCountryField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Description:" />
+                                     <TextField fx:id="destinationDescriptionField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                  <children>
+                                     <Label prefWidth="120.0" text="Price:" />
+                                     <TextField fx:id="destinationPriceField" HBox.hgrow="ALWAYS" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                                  <children>
+                                     <Button mnemonicParsing="false" onAction="#saveDestination" styleClass="btn-primary" text="Save Changes" />
+                                     <Button mnemonicParsing="false" onAction="#resetDestinationForm" styleClass="btn-secondary" text="Reset Form" />
+                                  </children>
+                                  <VBox.margin>
+                                     <Insets top="10.0" />
+                                  </VBox.margin>
+                               </HBox>
+                               <padding>
+                                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                               </padding>
+                            </VBox>
+                         </children>
+                         <padding>
+                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                         </padding>
+                      </VBox>
+                   </center>
+                </BorderPane>
+              </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Bookings">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <center>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                       <children>
-                                          <Label text="Search:">
-                                             <font>
-                                                <Font name="System Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="bookingSearchField" HBox.hgrow="ALWAYS" />
-                                          <Button mnemonicParsing="false" onAction="#searchBookings" styleClass="btn-primary" text="Search" />
-                                       </children>
-                                    </HBox>
-                                    <TableView fx:id="bookingsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                      <columns>
-                                        <TableColumn fx:id="bookingIdColumn" prefWidth="50.0" text="ID" />
-                                        <TableColumn fx:id="bookingCustomerColumn" prefWidth="150.0" text="Customer" />
-                                          <TableColumn fx:id="bookingDestinationColumn" prefWidth="150.0" text="Destination" />
-                                          <TableColumn fx:id="bookingTravelDateColumn" prefWidth="100.0" text="Travel Date" />
-                                          <TableColumn fx:id="bookingPeopleColumn" prefWidth="80.0" text="People" />
-                                          <TableColumn fx:id="bookingPriceColumn" prefWidth="100.0" text="Total Price" />
-                                          <TableColumn fx:id="bookingStatusColumn" prefWidth="100.0" text="Status" />
-                                      </columns>
-                                    </TableView>
-                                    <HBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#newBooking" styleClass="btn-primary" text="New Booking" />
-                                          <Button mnemonicParsing="false" onAction="#editBooking" styleClass="btn-secondary" text="Edit Booking" />
-                                          <Button mnemonicParsing="false" onAction="#deleteBooking" styleClass="btn-danger" text="Delete Booking" />
-                                          <Button mnemonicParsing="false" onAction="#changeBookingStatus" styleClass="btn-secondary" text="Change Status" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </center>
-                        </BorderPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Reports">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <left>
-                              <VBox prefHeight="200.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <children>
-                                    <Label styleClass="section-title" text="Report Type">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Button mnemonicParsing="false" onAction="#generateCustomerReport" styleClass="btn-secondary" prefWidth="180.0" text="Customer Travel History" />
-                                    <Button mnemonicParsing="false" onAction="#generateDestinationReport" styleClass="btn-secondary" prefWidth="180.0" text="Popular Destinations" />
-                                    <Button mnemonicParsing="false" onAction="#generateBookingReport" styleClass="btn-secondary" prefWidth="180.0" text="Booking Summary" />
-                                    <Button mnemonicParsing="false" onAction="#generateRevenueReport" styleClass="btn-secondary" prefWidth="180.0" text="Revenue Report" />
-                                    <Button mnemonicParsing="false" onAction="#exportReport" styleClass="btn-primary" prefWidth="180.0" text="Export Current Report" />
-                                 </children>
-                              </VBox>
-                           </left>
-                           <center>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <children>
-                                    <Label fx:id="reportTitleLabel" styleClass="section-title" text="Report">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <TableView fx:id="reportTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                                 </children>
-                              </VBox>
-                           </center>
-                        </BorderPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Admin">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane fx:id="adminContainer" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <center>
-                              <VBox fx:id="adminLoginBox" alignment="CENTER" maxWidth="400.0" spacing="20.0" styleClass="login-box" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Label styleClass="login-title" text="Admin Login">
-                                       <font>
-                                          <Font name="System Bold" size="24.0" />
-                                       </font>
-                                    </Label>
-                                    <Label styleClass="login-subtitle" text="Please enter your credentials to access admin features">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <VBox spacing="10.0">
-                                       <children>
-                                          <Label styleClass="input-label" text="Username">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="adminUsernameField" promptText="Enter username" styleClass="text-field" />
-                                       </children>
-                                    </VBox>
-                                    <VBox spacing="10.0">
-                                       <children>
-                                          <Label styleClass="input-label" text="Password">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <PasswordField fx:id="adminPasswordField" promptText="Enter password" styleClass="text-field" />
-                                       </children>
-                                    </VBox>
-                                    <Label fx:id="adminErrorLabel" styleClass="error-label" text="Invalid username or password" visible="false">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox alignment="CENTER" spacing="20.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#loginAdmin" styleClass="login-button" text="Login">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                                 </padding>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                              </VBox>
-                           </center>
-                        </BorderPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
+          
+          <Tab text="Bookings">
+             <content>
+                <AnchorPane>
+                   <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <center>
+                         <VBox spacing="15.0">
+                            <padding>
+                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <children>
+                               <VBox VBox.vgrow="ALWAYS" styleClass="admin-card">
+                                  <TableView fx:id="bookingsTable" VBox.vgrow="ALWAYS" styleClass="selection-table">
+                                    <columns>
+                                      <TableColumn fx:id="bookingIdColumn" prefWidth="50.0" text="ID" />
+                                      <TableColumn fx:id="bookingCustomerColumn" prefWidth="150.0" text="Customer" />
+                                        <TableColumn fx:id="bookingDestinationColumn" prefWidth="150.0" text="Destination" />
+                                        <TableColumn fx:id="bookingTravelDateColumn" prefWidth="100.0" text="Travel Date" />
+                                        <TableColumn fx:id="bookingPeopleColumn" prefWidth="80.0" text="People" />
+                                        <TableColumn fx:id="bookingPriceColumn" prefWidth="100.0" text="Price" />
+                                        <TableColumn fx:id="bookingStatusColumn" prefWidth="100.0" text="Status" />
+                                    </columns>
+                                  </TableView>
+                                  <padding>
+                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                  </padding>
+                               </VBox>
+                               <HBox alignment="CENTER" spacing="15.0">
+                                  <children>
+                                     <Button mnemonicParsing="false" onAction="#newBooking" styleClass="btn-primary" text="New Booking" />
+                                     <Button mnemonicParsing="false" styleClass="btn-secondary" text="Edit" disable="true" />
+                                     <Button mnemonicParsing="false" onAction="#deleteBooking" styleClass="btn-danger" text="Delete" />
+                                     <Button mnemonicParsing="false" onAction="#changeBookingStatus" styleClass="btn-secondary" text="Change Status" />
+                                  </children>
+                               </HBox>
+                            </children>
+                         </VBox>
+                      </center>
+                   </BorderPane>
+                </AnchorPane>
+             </content>
+          </Tab>
+          
+          <Tab text="Reports">
+             <content>
+                <AnchorPane>
+                   <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <left>
+                         <VBox prefWidth="250.0" spacing="15.0">
+                            <padding>
+                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <children>
+                               <Label styleClass="section-title" text="Report Type">
+                                  <font>
+                                     <Font name="System Bold" size="18.0" />
+                                  </font>
+                               </Label>
+                               <VBox spacing="10.0" styleClass="admin-card">
+                                  <Button mnemonicParsing="false" onAction="#generateCustomerReport" styleClass="admin-menu-button" prefWidth="200.0" text="Customer Travel History" />
+                                  <Button mnemonicParsing="false" onAction="#generateBookingReport" styleClass="admin-menu-button" prefWidth="200.0" text="Booking Summary" />
+                                  <Button mnemonicParsing="false" onAction="#generateRevenueReport" styleClass="admin-menu-button" prefWidth="200.0" text="Revenue Report" />
+                                  <padding>
+                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                  </padding>
+                               </VBox>
+                               <Button mnemonicParsing="false" onAction="#exportReport" styleClass="btn-primary" prefWidth="200.0" text="Export Current Report" />
+                            </children>
+                         </VBox>
+                      </left>
+                      <center>
+                         <VBox spacing="15.0">
+                            <padding>
+                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <children>
+                               <Label fx:id="reportTitleLabel" styleClass="admin-title" text="Report Results">
+                                  <font>
+                                     <Font name="System Bold" size="18.0" />
+                                  </font>
+                               </Label>
+                               <VBox VBox.vgrow="ALWAYS" styleClass="admin-card">
+                                  <TableView fx:id="reportTable" VBox.vgrow="ALWAYS" styleClass="selection-table" />
+                                  <padding>
+                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                  </padding>
+                               </VBox>
+                            </children>
+                         </VBox>
+                      </center>
+                   </BorderPane>
+                </AnchorPane>
+             </content>
+          </Tab>
         </tabs>
       </TabPane>
    </center>
+   
    <bottom>
-      <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" spacing="10.0" styleClass="status-bar" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="200.0" spacing="10.0" styleClass="status-bar">
          <children>
-            <Label styleClass="status-label" text="Travel Agency Booking System">
+            <Label text="Bookify Travel Agency" styleClass="status-label">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="statusLabel" text="Ready" HBox.hgrow="ALWAYS" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Label fx:id="statusLabel" text="Ready" styleClass="status-label" />
          </children>
          <padding>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+            <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
          </padding>
       </HBox>
    </bottom>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -8,69 +7,93 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="login-pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookify.app.controller.LoginController">
-   <center>
-      <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0" styleClass="login-box" BorderPane.alignment="CENTER">
-         <children>
-            <Label styleClass="login-title" text="Travel Agency Admin">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label styleClass="login-subtitle" text="Please enter your credentials to continue">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <VBox spacing="10.0">
-               <children>
-                  <Label styleClass="input-label" text="Username">
+<StackPane xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.bookify.app.controller.LoginController"
+      stylesheets="@styles.css"
+      style="-fx-background-color: white;"
+      maxHeight="Infinity" maxWidth="Infinity">
+   
+   <!-- Simple logo and login form for clean design -->
+   <BorderPane>
+      <center>
+         <StackPane>
+            <VBox alignment="CENTER" maxWidth="450" spacing="40" 
+                  style="-fx-background-color: white; -fx-background-radius: 18px; -fx-padding: 40px; -fx-border-color: #dddddd; -fx-border-radius: 18px; -fx-border-width: 1px;">
+               <effect>
+                  <DropShadow color="#00000080" height="20.0" radius="9.5" width="20.0" />
+               </effect>
+               
+               <HBox alignment="CENTER" spacing="15">
+                  <Label text="✈️" style="-fx-font-size: 48px;">
+                     <effect>
+                        <DropShadow color="#00000040" radius="3.0" spread="0.01" />
+                     </effect>
+                  </Label>
+               </HBox>
+               
+               <Label text="BOOKIFY TRAVEL" style="-fx-text-fill: #333333; -fx-font-weight: bold; -fx-font-size: 28px; -fx-letter-spacing: 0.5px;">
+                  <effect>
+                     <DropShadow color="#00000040" radius="3.0" spread="0.01" />
+                  </effect>
+               </Label>
+               
+               <Label text="Travel Agency Booking System" style="-fx-text-fill: #666666; -fx-font-size: 16px;">
+                  <effect>
+                     <DropShadow color="#00000020" radius="2.0" spread="0.01" />
+                  </effect>
+               </Label>
+               
+               <VBox spacing="30.0" style="-fx-padding: 20 0 0 0;">
+                  <VBox spacing="12.0">
+                     <Label text="Username" style="-fx-text-fill: #333333;">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="usernameField" promptText="Enter your username" />
+                  </VBox>
+                  
+                  <VBox spacing="12.0">
+                     <Label text="Password" style="-fx-text-fill: #333333;">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Label>
+                     <PasswordField fx:id="passwordField" promptText="Enter your password" />
+                  </VBox>
+                  
+                  <Label fx:id="errorLabel" style="-fx-text-fill: #e74c3c;" text="Invalid username or password" visible="false">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usernameField" promptText="Enter username" styleClass="text-field" />
-               </children>
-            </VBox>
-            <VBox spacing="10.0">
-               <children>
-                  <Label styleClass="input-label" text="Password">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="passwordField" promptText="Enter password" styleClass="text-field" />
-               </children>
-            </VBox>
-            <Label fx:id="errorLabel" styleClass="error-label" text="Invalid username or password" visible="false">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" spacing="20.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#login" styleClass="login-button" text="Login">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
+                  
+                  <Button mnemonicParsing="false" onAction="#login" text="Sign In" styleClass="btn-primary" maxWidth="Infinity">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.02" />
+                     </effect>
+                     <padding>
+                        <Insets top="16" right="0" bottom="16" left="0"/>
+                     </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#cancel" styleClass="cancel-button" text="Cancel">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
+                  
+                  <Button mnemonicParsing="false" onAction="#cancel" text="Cancel" styleClass="btn-secondary" maxWidth="Infinity">
+                     <padding>
+                        <Insets top="14" right="0" bottom="14" left="0"/>
+                     </padding>
                   </Button>
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-         </padding>
-         <effect>
-            <DropShadow />
-         </effect>
-      </VBox>
-   </center>
-</BorderPane> 
+               </VBox>
+               
+               <HBox alignment="CENTER" spacing="10" style="-fx-padding: 20 0 0 0;">
+                  <Label text="Admin credentials: admin / admin123" style="-fx-text-fill: #3498db; -fx-font-size: 13;" />
+               </HBox>
+            </VBox>
+         </StackPane>
+      </center>
+   </BorderPane>
+</StackPane> 
